@@ -1,2 +1,2 @@
-export * from "./MovieResult";
 export * from "./OmdbApiResponse";
+export * from "./OmdbApiInfoResponse";

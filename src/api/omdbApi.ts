@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { OmdbApiResponse } from "./interfaces";
+import { OmdbApiInfoResponse, OmdbApiResponse } from "./interfaces";
 
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const API_URL = "http://www.omdbapi.com";
@@ -16,6 +16,14 @@ export const omdbApi = {
     const response = await instance.get("/", {
       params: {
         s: title,
+      },
+    });
+    return response.data;
+  },
+  getMovie: async (title: string): Promise<OmdbApiInfoResponse> => {
+    const response = await instance.get("/", {
+      params: {
+        t: title,
       },
     });
     return response.data;
