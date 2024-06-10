@@ -2,6 +2,16 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useMovieDetails } from "../hooks/useSearchMovies";
 import { Spinner } from "../components";
+import {
+  OmdbApiInfoResponse,
+  OmdbApiInfoResponseError,
+} from "../api/interfaces";
+
+function isErrorResponse(
+  data: OmdbApiInfoResponse
+): data is OmdbApiInfoResponseError {
+  return data.Response === "False";
+}
 
 export const Movie: React.FC = () => {
   const { title } = useParams<{ title: string }>();
@@ -12,8 +22,8 @@ export const Movie: React.FC = () => {
 
   return (
     <main className="flex flex-col items-center gap-4">
-      {data && data.Response === "False" && <p>{data.Error}</p>}
-      {data && data.Response === "True" && (
+      {data && isErrorResponse(data) && <p>{data.Error}</p>}
+      {data && !isErrorResponse(data) && (
         <div>
           <h1>{data.Title}</h1>
           <img src={data.Poster} alt={data.Title} />

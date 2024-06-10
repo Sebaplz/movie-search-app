@@ -23,7 +23,7 @@ export const omdbApi = {
   getMovie: async (title: string): Promise<OmdbApiInfoResponse> => {
     const response = await instance.get("/", {
       params: {
-        t: title,
+        i: title,
       },
     });
     return response.data;
