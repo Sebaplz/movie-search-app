@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 body {
-  background-color: #f3f4f6;
+  background-color: #222b3b;
   font-family: "Poppins", sans-serif;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Oculta la barra de desplazamiento en Chrome, Safari y Opera */
 }
