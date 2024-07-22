@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMovieDetails } from "../hooks/useSearchMovies";
 import { Spinner } from "../components";
@@ -17,13 +17,21 @@ export const Movie: React.FC = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
   const { data, error, isLoading } = useMovieDetails(imdbID!);
 
+  useEffect(() => {
+    if (data && !isErrorResponse(data)) {
+      document.title = data.Title || "Movie Details";
+    }
+  }, [data]);
+
   if (isLoading) return <Spinner />;
-  if (error) return <p>{error.message}</p>;
+  if (error) return <p className="text-red-500">{error.message}</p>;
 
   return (
     <main className="min-h-screen flex items-center">
       <article className="flex flex-col mx-auto gap-4 my-4 w-[22rem] md:w-[35rem] lg:w-[50rem] border-2 rounded-xl border-[#21293b] items-center justify-center">
-        {data && isErrorResponse(data) && <p>{data.Error}</p>}
+        {data && isErrorResponse(data) && (
+          <p className="text-red-500">{data.Error}</p>
+        )}
         {data && !isErrorResponse(data) && (
           <div className="flex flex-col lg:flex-row ml-4 text-[#ccd3e3]">
             <img
