@@ -25,11 +25,6 @@ export const Home: React.FC = () => {
   const handleSearch = (data: SearchSchema) => {
     const searchQuery = data.query;
     setQuery(searchQuery);
-    try {
-      localStorage.setItem("lastSearch", searchQuery);
-    } catch (error) {
-      console.error("Error setting localStorage", error);
-    }
   };
 
   useEffect(() => {
@@ -37,6 +32,16 @@ export const Home: React.FC = () => {
       setQuery("Star Wars");
     }
   }, []);
+
+  useEffect(() => {
+    if (data && !isErrorResponse(data)) {
+      try {
+        localStorage.setItem("lastSearch", query);
+      } catch (error) {
+        console.error("Error setting localStorage", error);
+      }
+    }
+  }, [data, query]);
 
   return (
     <main className="flex flex-col min-h-screen items-center gap-4">
