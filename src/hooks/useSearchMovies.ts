@@ -10,10 +10,10 @@ export const useSearchMovies = (title: string) => {
   });
 };
 
-export const useMovieDetails = (title: string) => {
+export const useMovieDetails = (imdbID: string) => {
   return useQuery<OmdbApiInfoResponse, Error>({
-    queryKey: ["movieDetails", title],
-    queryFn: () => omdbApi.getMovie(title),
-    enabled: !!title,
+    queryKey: ["movieDetails", imdbID],
+    queryFn: () => omdbApi.getMovie(imdbID),
+    enabled: !!imdbID,
   });
 };

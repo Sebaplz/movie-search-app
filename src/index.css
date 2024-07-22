@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #222b3b;
-  font-family: "Poppins", sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Oculta la barra de desplazamiento en Chrome, Safari y Opera */
+body {
+  background-color: #101628;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }

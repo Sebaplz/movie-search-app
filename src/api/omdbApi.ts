@@ -20,10 +20,10 @@ export const omdbApi = {
     });
     return response.data;
   },
-  getMovie: async (title: string): Promise<OmdbApiInfoResponse> => {
+  getMovie: async (imdbID: string): Promise<OmdbApiInfoResponse> => {
     const response = await instance.get("/", {
       params: {
-        i: title,
+        i: imdbID,
       },
     });
     return response.data;

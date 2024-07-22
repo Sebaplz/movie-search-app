@@ -5,7 +5,7 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/movie/:title" element={<Movie />} />
+      <Route path="/movie/:imdbID" element={<Movie />} />
     </Routes>
   );
 };
