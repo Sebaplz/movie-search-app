@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { OmdbApiInfoResponseError, OmdbApiResponse } from "../api/interfaces";
 import { ListMovie, SearchForm, Spinner } from "../components";
 import { useSearchMovies } from "../hooks/useSearchMovies";
@@ -32,6 +32,12 @@ export const Home: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("lastSearch") === null) {
+      setQuery("Star Wars");
+    }
+  }, []);
+
   return (
     <main className="flex flex-col min-h-screen items-center gap-4">
       <h1 className="text-4xl opacity-0">Movie Search App</h1>
@@ -44,8 +50,10 @@ export const Home: React.FC = () => {
         </div>
       )}
       {isLoading && <Spinner />}
-      {error && <p>{error.message}</p>}
-      {data && isErrorResponse(data) && <p>{data.Error}</p>}
+      {error && <p className="text-red-500">{error.message}</p>}
+      {data && isErrorResponse(data) && (
+        <p className="text-red-500">{data.Error}</p>
+      )}
       {data && !isErrorResponse(data) && <ListMovie items={data.Search} />}
     </main>
   );

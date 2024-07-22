@@ -15,6 +15,7 @@ export interface Search {
 export enum Type {
   Movie = "movie",
   Series = "series",
+  Game = "game",
 }
 
 export interface OmdbApiResponseError {
